@@ -55,7 +55,7 @@ init();
 async function init() {
   loadFromURL();
   
-  const res = await fetch("https://raw.githubusercontent.com/h6mzy/betta-gohtmx/main/data/species.json");
+  const res = await fetch("data/species.json");
   speciesData = await res.json();
   
   speciesData = speciesData.map((s, i) => ({
