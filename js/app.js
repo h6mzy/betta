@@ -229,7 +229,7 @@ function renderList() {
         <li>
           <a href="#species/${s.slug}">
             <span class="text-weak">${s.id}</span>
-            <img class="img" src="${s.photos?.[0]?.src || ""}">
+            <img class="img" src="${s.photos?.[0]?.src || ""}" alt="${s.name}">
             <span>${s.scientific || ""}</span>
           </a>
         </li>
