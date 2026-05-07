@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap'); */
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -50,7 +50,7 @@ table {
 }
 
 :root {
-  --font-family: 'JetBrains Mono', monospace;
+  --font-family: monospace;
   --text-color: #222;
   --text-weak: #595959;
   --border-color: #333;
@@ -83,7 +83,7 @@ body {
   height: 100dvh;
   min-height: 100vh;
   min-height: 100dvh;
-  font-family: "DotGothic16", sans-serif;
+  font-family: monospace;
   font-weight: 400;
   font-style: normal;
   font-size: 1.2rem;
