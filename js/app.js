@@ -229,7 +229,7 @@ function renderList() {
         <li>
           <a href="#species/${s.slug}">
             <span class="text-weak">${s.id}</span>
-            <img class="img" src="${s.photos?.[0]?.src || ""}" alt="${s.name}">
+            <img class="img" src="${s.photos?.[0]?.src || ""}" alt="${s.name}" loading="lazy">
             <span>${s.scientific || ""}</span>
           </a>
         </li>
@@ -242,7 +242,7 @@ function renderList() {
 function renderDetail(s) {
   ui.detail.innerHTML = `
     <div class="species-info">
-      <img class="img" src="${s.photos[0].src}" alt="${s.name}">
+      <img class="img" src="${s.photos[0].src}" alt="${s.name}" loading="lazy">
       <div class="h-full scroll-y pb">
         <div class="desc">
           <p><strong><span class="icon">${icons.scientific}</span> Scientific</strong><span class="value">${s.scientific}</span></p>
