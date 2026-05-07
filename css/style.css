@@ -52,7 +52,7 @@ table {
 :root {
   --font-family: 'JetBrains Mono', monospace;
   --text-color: #222;
-  --text-weak: #888;
+  --text-weak: #595959;
   --border-color: #333;
   --radius: 8px;
   --radius-sm: 4px;
