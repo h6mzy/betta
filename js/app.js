@@ -45,7 +45,7 @@ async function init() {
   bindEvents();
   showLoading();
 
-  const res = await fetch("data/species.json");
+  const res = await fetch("/data/species.json");
   speciesData = await res.json();
 
   speciesData = speciesData.map((s, i) => ({
@@ -54,8 +54,7 @@ async function init() {
   }));
 
   renderFilters();
-  renderList();
-  router();
+  showList();
 }
 
 /* -------------------- EVENTS -------------------- */
@@ -292,7 +291,6 @@ function router() {
     if (species) return showDetail(species);
   }
 
-  loadFromURL();
   showList();
 }
 
