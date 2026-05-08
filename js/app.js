@@ -219,17 +219,31 @@ function clearText() {
   renderList();
 }
 
+/* -------------------- IMG -------------------- */
+
+function renderImg(src, alt = "image", lazy = true) {
+  return src
+    ? `<img 
+        class="img"
+        loading="${lazy ? "lazy" : "eager"}"
+        fetchpriority="${lazy ? "auto" : "high"}" 
+        decoding="async" 
+        src="${src}" 
+        alt="${alt}">`
+    : `<div class="img"></div>`;
+}
+
 /* -------------------- LIST -------------------- */
 
 function renderList() {
   const filtered = speciesData.filter(match);
 
   ui.list.innerHTML = filtered.length
-    ? filtered.map(s => `
+    ? filtered.map((s, i) => `
         <li>
           <a href="#species/${s.slug}">
             <span class="text-weak">${s.id}</span>
-            <img class="img" src="${s.photos?.[0]?.src || ""}" alt="${s.name}" loading="lazy">
+            ${renderImg(s.photos?.[0]?.src, s.name, i > 7)}
             <span>${s.scientific || ""}</span>
           </a>
         </li>
@@ -242,7 +256,7 @@ function renderList() {
 function renderDetail(s) {
   ui.detail.innerHTML = `
     <div class="species-info">
-      <img class="img" src="${s.photos[0].src}" alt="${s.name}" loading="lazy">
+      ${renderImg(s.photos?.[0]?.src, s.name, false)}
       <div class="h-full scroll-y pb">
         <div class="desc">
           <p><strong><span class="icon">${icons.scientific}</span> Scientific</strong><span class="value">${s.scientific}</span></p>
