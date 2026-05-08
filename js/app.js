@@ -54,6 +54,7 @@ async function init() {
   }));
 
   renderFilters();
+  renderList();
   router();
 }
 
