@@ -45,16 +45,23 @@ async function init() {
   bindEvents();
   showLoading();
 
-  const res = await fetch("/data/species.json");
-  speciesData = await res.json();
+  try {
+    const res = await fetch("/data/species.json");
+    if (!res.ok) throw new Error("Failed to load JSON");
 
-  speciesData = speciesData.map((s, i) => ({
-    ...s,
-    id: String(i + 1).padStart(3, "0")
-  }));
+    speciesData = await res.json();
 
-  renderFilters();
-  showList();
+    speciesData = speciesData.map((s, i) => ({
+      ...s,
+      id: String(i + 1).padStart(3, "0")
+    }));
+
+    renderFilters();
+    showList();
+  } catch (err) {
+    ui.list.innerHTML = `<li class="empty"><span>Failed to load data</span></li>`;
+    console.error(err);
+  }
 }
 
 /* -------------------- EVENTS -------------------- */
