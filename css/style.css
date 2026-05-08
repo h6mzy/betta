@@ -400,6 +400,7 @@ input[type=text] {
 
 #list .img {
   width: 90px;
+  flex: none;
 }
 
 #detail .img {
