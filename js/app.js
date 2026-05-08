@@ -42,16 +42,17 @@ init();
 
 async function init() {
   loadFromURL();
-  
+  bindEvents();
+  showLoading();
+
   const res = await fetch("data/species.json");
   speciesData = await res.json();
-  
+
   speciesData = speciesData.map((s, i) => ({
     ...s,
     id: String(i + 1).padStart(3, "0")
   }));
 
-  bindEvents();
   renderFilters();
   router();
 }
@@ -229,6 +230,16 @@ function renderImg(src, alt = "image", lazy = true) {
         src="${src}" 
         alt="${alt}">`
     : `<div class="img"></div>`;
+}
+
+/* -------------------- LOADING -------------------- */
+
+function showLoading() {
+  ui.list.innerHTML = `
+    <li class="empty">
+      <span>Loading species...</span>
+    </li>
+  `;
 }
 
 /* -------------------- LIST -------------------- */
