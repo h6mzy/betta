@@ -1,4 +1,14 @@
-const $ = id => document.getElementById(id);
+const $ = (id) => document.getElementById(id);
+
+/* -------------------- STATE -------------------- */
+
+const state = {
+  data: [],
+  query: "",
+  filters: { group: "", breeding: "" }
+};
+
+/* -------------------- UI -------------------- */
 
 const ui = {
   title: document.querySelector("h1"),
@@ -13,79 +23,95 @@ const ui = {
   back: $("back")
 };
 
+/* -------------------- ICONS -------------------- */
+
 const icons = {
-  close: `<svg class="icon" width="1em" height="1em"><use href="#icon-close"></use></svg>`,
-  closeOutline: `<svg class="icon" width="1em" height="1em"><use href="#icon-close-inner"></use></svg>`,
-  find: `<svg class="icon" width="1em" height="1em"><use href="#icon-find"></use></svg>`,
-  right: `<svg class="icon" width="1em" height="1em"><use href="#icon-right"></use></svg>`,
-  group: `<svg class="icon" width="1em" height="1em"><use href="#icon-group"></use></svg>`,
-  heart: `<svg class="icon" width="1em" height="1em"><use href="#icon-heart"></use></svg>`,
-  scientific: `<svg class="icon" width="1em" height="1em"><use href="#icon-scientific"></use></svg>`,
-  fish: `<svg class="icon" width="1em" height="1em"><use href="#icon-fish"></use></svg>`,
-  mountain: `<svg class="icon" width="1em" height="1em"><use href="#icon-mountain"></use></svg>`,
-  thermometer: `<svg class="icon" width="1em" height="1em"><use href="#icon-thermometer"></use></svg>`,
-  hand: `<svg class="icon" width="1em" height="1em"><use href="#icon-hand"></use></svg>`,
+  close: `<svg class="icon"><use href="#icon-close"></use></svg>`,
+  closeOutline: `<svg class="icon"><use href="#icon-close-inner"></use></svg>`,
+  find: `<svg class="icon"><use href="#icon-find"></use></svg>`,
+  right: `<svg class="icon"><use href="#icon-right"></use></svg>`,
+  group: `<svg class="icon"><use href="#icon-group"></use></svg>`,
+  heart: `<svg class="icon"><use href="#icon-heart"></use></svg>`,
+  scientific: `<svg class="icon"><use href="#icon-scientific"></use></svg>`,
+  fish: `<svg class="icon"><use href="#icon-fish"></use></svg>`,
+  mountain: `<svg class="icon"><use href="#icon-mountain"></use></svg>`,
+  thermometer: `<svg class="icon"><use href="#icon-thermometer"></use></svg>`,
+  hand: `<svg class="icon"><use href="#icon-hand"></use></svg>`
 };
 
-let speciesData = [];
-let state = {
-  query: "",
-  filters: { group: "", breeding: "" }
-};
+const icon = (id) => icons[id] || "";
 
 /* -------------------- HELPERS -------------------- */
 
-const slugify = (str) =>
+const slugify = (str = "") =>
   str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
-const match = (s) =>
-  (!state.query ||
+const match = (s) => {
+  const q = state.query;
+
+  const textMatch =
+    !q ||
     [s.name, s.scientific].some(v =>
-      v?.toLowerCase().includes(state.query)
-    )
-  ) &&
-  Object.entries(state.filters).every(([k, v]) =>
+      (v || "").toLowerCase().includes(q)
+    );
+
+  const filterMatch = Object.entries(state.filters).every(([k, v]) =>
     !v || slugify(s[k]) === v
   );
+
+  return textMatch && filterMatch;
+};
 
 /* -------------------- INIT -------------------- */
 
 init();
 
 async function init() {
-  loadFromURL();
-  
-  const res = await fetch("data/species.json");
-  speciesData = await res.json();
-  
-  speciesData = speciesData.map((s, i) => ({
-    ...s,
-    id: String(i + 1).padStart(3, "0")
-  }));
-
   bindEvents();
-  renderFilters();
-  router();
+  showLoading();
+
+  try {
+    const res = await fetch("data/species.json");
+    if (!res.ok) throw new Error("Failed to load data");
+
+    const json = await res.json();
+
+    state.data = json.map((s, i) => ({
+      ...s,
+      id: String(i + 1).padStart(3, "0")
+    }));
+
+    renderFilters();
+    syncFromURL();
+    render();
+  } catch (err) {
+    console.error(err);
+    ui.list.innerHTML = `<li class="empty">Failed to load data</li>`;
+  }
 }
 
 /* -------------------- EVENTS -------------------- */
 
 function bindEvents() {
-  [
-    [ui.toggle, toggleDrawer],
-    [ui.mask, toggleDrawer],
-    [ui.back, () => ui.detail.classList.remove("show")]
-  ].forEach(([el, fn]) => el.addEventListener("click", fn));
+  ui.toggle.onclick = toggleDrawer;
+  ui.mask.onclick = toggleDrawer;
+  ui.back.onclick = () => ui.detail.classList.remove("show");
 
-  ui.search.addEventListener("input", e => {
+  ui.search.oninput = (e) => {
     state.query = e.target.value.toLowerCase();
-    renderList();
-  });
+    render();
+    updateURL();
+  };
 
-  window.addEventListener("hashchange", router);
+  window.addEventListener("hashchange", () => {
+    syncFromURL();
+    render();
+  });
 }
 
-function loadFromURL() {
+/* -------------------- URL STATE -------------------- */
+
+function syncFromURL() {
   const hash = location.hash;
 
   if (!hash.startsWith("#?")) return;
@@ -94,7 +120,9 @@ function loadFromURL() {
 
   state.filters.group = params.get("group") || "";
   state.filters.breeding = params.get("breeding") || "";
-  state.query = (params.get("q") || "").toLowerCase();
+  state.query = params.get("q") || "";
+
+  ui.search.value = state.query;
 }
 
 function updateURL() {
@@ -104,29 +132,26 @@ function updateURL() {
   if (state.filters.breeding) params.set("breeding", state.filters.breeding);
   if (state.query) params.set("q", state.query);
 
-  const query = params.toString();
-  location.hash = query ? `#?${query}` : "#";
+  location.hash = params.toString() ? `#?${params}` : "#";
 }
 
 /* -------------------- DRAWER -------------------- */
 
 function toggleDrawer() {
-  const open = ui.finder.classList.toggle("show");
+  ui.finder.classList.toggle("show");
   ui.mask.classList.toggle("show");
 
+  const open = ui.finder.classList.contains("show");
+
   ui.toggle.innerHTML = open
-    ? `${icons.close}<span>Close</span>`
-    : `${icons.find}<span>Find</span>`;
+    ? `${icon("close")}<span>Close</span>`
+    : `${icon("find")}<span>Find</span>`;
 }
 
 /* -------------------- FILTERS -------------------- */
 
 const FILTERS = {
-  group: {
-    icon: "group",
-    options: []
-  },
-
+  group: { icon: "group", options: [] },
   breeding: {
     icon: "heart",
     options: [
@@ -136,105 +161,108 @@ const FILTERS = {
   }
 };
 
-function renderOption(name, value, label) {
-  return `
-    <label>
-      <input type="radio"
-        name="${name}"
-        value="${value}"
-        ${state.filters[name] === value ? "checked" : ""}>
-      <span>${icons.right}</span>${label}
-    </label>
-  `;
-}
-
 function renderFilters() {
-  const groupMap = new Map();
+  const map = new Map();
 
-  speciesData.forEach(s => {
-    const value = slugify(s.group);
-    if (!groupMap.has(value)) {
-      groupMap.set(value, s.group);
-    }
+  state.data.forEach(s => {
+    const v = slugify(s.group);
+    if (!map.has(v)) map.set(v, s.group);
   });
 
-  FILTERS.group.options = [...groupMap.entries()].map(
-    ([value, label]) => ({ value, label })
-  );
+  FILTERS.group.options = [...map.entries()].map(([value, label]) => ({
+    value,
+    label
+  }));
 
-  FILTERS.group.map = groupMap;
-
-  const makeOptions = (name) => {
-    const { icon, options } = FILTERS[name];
-
-    return `
-      <fieldset class="radios">
-        <legend><span class="icon">${icons[icon]}</span>${name}</legend>
-
-        ${renderOption(name, "", "All")}
-
-        ${options.map(o =>
-          renderOption(name, o.value, o.label)
-        ).join("")}
-      </fieldset>
-    `;
-  };
+  FILTERS.group.map = map;
 
   ui.filters.innerHTML = `
     <div class="box text-box">
       <input type="text" placeholder="Search..." id="search-proxy" />
-      <button id="clear-btn" class="clear icon" type="button" aria-label="clear text">${icons.closeOutline}</button>
+      <button id="clear-btn" class="clear icon">
+        ${icon("close")}
+      </button>
     </div>
-    
+
     <div class="scroll-y">
-      ${makeOptions("group")}
-      ${makeOptions("breeding")}
+      ${renderOptions("group")}
+      ${renderOptions("breeding")}
     </div>
   `;
 
-  $("search-proxy").addEventListener("input", e => {
-    ui.search.value = e.target.value;
+  const proxy = $("search-proxy");
+  const clear = $("clear-btn");
+
+  proxy.oninput = (e) => {
     state.query = e.target.value.toLowerCase();
+    ui.search.value = e.target.value;
+    render();
     updateURL();
-    renderList();
-  });
-  
-  $("clear-btn").addEventListener("click", clearText);
-  
-  ui.filters.querySelectorAll("input[type=radio]").forEach(r => {
-    r.addEventListener("change", () => {
+  };
+
+  clear.onclick = () => {
+    state.query = "";
+    ui.search.value = "";
+    proxy.value = "";
+    render();
+    updateURL();
+  };
+
+  ui.filters.querySelectorAll("input").forEach(r => {
+    r.onchange = () => {
       state.filters[r.name] = r.value;
+      render();
       updateURL();
-      renderList();
       toggleDrawer();
-    });
+    };
   });
 }
 
-function clearText() {
-  ui.search.value = state.query;
-  $("search-proxy").value = "";
-  state.query = "";
-  updateURL();
-  renderList();
+function renderOptions(name) {
+  const { icon: i, options } = FILTERS[name];
+
+  return `
+    <fieldset class="radios">
+      <legend>${icon(i)} ${name}</legend>
+      ${renderOption(name, "", "All")}
+      ${options.map(o => renderOption(name, o.value, o.label)).join("")}
+    </fieldset>
+  `;
 }
 
-/* -------------------- LIST -------------------- */
+function renderOption(name, value, label) {
+  return `
+    <label>
+      <input type="radio" name="${name}" value="${value}"
+        ${state.filters[name] === value ? "checked" : ""}>
+      ${icon("right")} ${label}
+    </label>
+  `;
+}
 
-function renderList() {
-  const filtered = speciesData.filter(match);
+/* -------------------- RENDER -------------------- */
 
-  ui.list.innerHTML = filtered.length
-    ? filtered.map(s => `
-        <li>
-          <a href="#species/${s.slug}">
-            <span class="text-weak">${s.id}</span>
-            <img class="img" src="${s.photos?.[0]?.src || ""}" alt="${s.name}" loading="lazy">
-            <span>${s.scientific || ""}</span>
-          </a>
-        </li>
-      `).join("")
-    : `<li class="empty"><span>No species found.</span></li>`;
+function render() {
+  const list = state.data.filter(match);
+
+  ui.list.innerHTML = list.length
+    ? list.map(renderItem).join("")
+    : `<li class="empty">No species found</li>`;
+}
+
+function renderItem(s, i) {
+  return `
+    <li>
+      <a href="#species/${s.slug}">
+        <span class="text-weak">${s.id}</span>
+        <img class="img"
+          src="${s.photos?.[0]?.src || ""}"
+          alt="${s.name}"
+          loading="${i > 6 ? "lazy" : "eager"}">
+        <span>${s.scientific || ""}</span>
+      </a>
+    </li>
+  `;
 }
 
 /* -------------------- DETAIL -------------------- */
@@ -242,16 +270,16 @@ function renderList() {
 function renderDetail(s) {
   ui.detail.innerHTML = `
     <div class="species-info">
-      <img class="img" src="${s.photos[0].src}" alt="${s.name}" loading="lazy">
-      <div class="h-full scroll-y pb">
-        <div class="desc">
-          <p><strong><span class="icon">${icons.scientific}</span> Scientific</strong><span class="value">${s.scientific}</span></p>
-          <p><strong><span class="icon">${icons.fish}</span>Info</strong><span class="value">${s.info}</span></p>
-          <p><strong><span class="icon">${icons.mountain}</span>Habitat</strong><span class="value">${s.habitat}</span></p>
-          <p><strong><span class="icon">${icons.heart}</span>Breeding</strong><span class="value">${s.breeding}</span></p>
-          <p><strong><span class="icon">${icons.thermometer}</span>Captive</strong><span class="value">${s.captive}</span></p>
-          <p><strong><span class="icon">${icons.hand}</span>Red List</strong><span class="value">${s.redlist}</span></p>
-        </div>
+      <img class="img"
+        src="${s.photos?.[0]?.src || ""}"
+        alt="${s.name}">
+      <div class="desc">
+        <p>${icon("scientific")} ${s.scientific}</p>
+        <p>${icon("fish")} ${s.info}</p>
+        <p>${icon("mountain")} ${s.habitat}</p>
+        <p>${icon("heart")} ${s.breeding}</p>
+        <p>${icon("thermometer")} ${s.captive}</p>
+        <p>${icon("hand")} ${s.redlist}</p>
       </div>
     </div>
   `;
@@ -260,36 +288,42 @@ function renderDetail(s) {
 /* -------------------- ROUTER -------------------- */
 
 function router() {
+  syncFromURL();
+
   const hash = location.hash;
 
   if (hash.startsWith("#species/")) {
     const slug = hash.replace("#species/", "");
-    const species = speciesData.find(s => s.slug === slug);
-    if (species) return showDetail(species);
+    const item = state.data.find(s => s.slug === slug);
+    if (item) return showDetail(item);
   }
 
-  loadFromURL();
   showList();
 }
 
-function showDetail(s) {
-  ui.title.innerHTML = `<span class="text-weak">${s.id}</span> ${s.name}`;
-  ui.grid.classList.remove("show");
-  ui.detail.classList.add("show");
-  ui.back.classList.add("show");
-  renderDetail(s);
-}
+/* -------------------- VIEWS -------------------- */
 
 function showList() {
-  const label = FILTERS.group.map?.get(state.filters.group);
-
-  ui.title.textContent = label
-    ? `${label} Complex`
-    : "Betta info 2.0";
-
   ui.grid.classList.add("show");
   ui.detail.classList.remove("show");
   ui.back.classList.remove("show");
 
-  renderList();
+  ui.title.textContent =
+    FILTERS.group.map?.get(state.filters.group) || "Betta info";
+
+  render();
+}
+
+function showDetail(s) {
+  ui.title.textContent = s.name;
+
+  ui.grid.classList.remove("show");
+  ui.detail.classList.add("show");
+  ui.back.classList.add("show");
+
+  renderDetail(s);
+}
+
+function showLoading() {
+  ui.list.innerHTML = `<li class="empty">Loading...</li>`;
 }
