@@ -49,6 +49,11 @@ table {
 	border-spacing: 0;
 }
 
+/* fix iOS bug */
+input, textarea, select {
+  font-size: 16px;
+}
+
 :root {
   --font-family: monospace;
   --text-color: #222;
