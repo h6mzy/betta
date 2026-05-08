@@ -42,30 +42,18 @@ init();
 
 async function init() {
   loadFromURL();
-  showLoading();
+  
+  const res = await fetch("data/species.json");
+  speciesData = await res.json();
+  
+  speciesData = speciesData.map((s, i) => ({
+    ...s,
+    id: String(i + 1).padStart(3, "0")
+  }));
 
-  try {
-    const res = await fetch("/data/species.json");
-    if (!res.ok) throw new Error("Failed to load JSON");
-
-    speciesData = await res.json();
-
-    speciesData = speciesData.map((s, i) => ({
-      ...s,
-      id: String(i + 1).padStart(3, "0")
-    }));
-
-    renderFilters();   // ensures #search-proxy exists
-
-    bindEvents();      // move here
-
-    $("search-proxy").value = state.query;
-
-    showList();
-  } catch (err) {
-    ui.list.innerHTML = `<li class="empty"><span>Failed to load data</span></li>`;
-    console.error(err);
-  }
+  bindEvents();
+  renderFilters();
+  router();
 }
 
 /* -------------------- EVENTS -------------------- */
@@ -95,8 +83,6 @@ function loadFromURL() {
   state.filters.group = params.get("group") || "";
   state.filters.breeding = params.get("breeding") || "";
   state.query = (params.get("q") || "").toLowerCase();
-
-  ui.search.value = state.query;
 }
 
 function updateURL() {
@@ -150,30 +136,6 @@ function renderOption(name, value, label) {
   `;
 }
 
-const debounce = (fn, ms = 150) => {
-  let t;
-  return (...args) => {
-    clearTimeout(t);
-    t = setTimeout(() => fn(...args), ms);
-  };
-};
-
-function setQuery(value) {
-  const v = value.toLowerCase();
-
-  state.query = v;
-
-  ui.search.value = value;
-  const proxy = $("search-proxy");
-  if (proxy) proxy.value = value;
-}
-
-const handleSearch = debounce(e => {
-  setQuery(e.target.value);
-  updateURL();
-  renderList();
-}, 150);
-
 function renderFilters() {
   const groupMap = new Map();
 
@@ -191,11 +153,11 @@ function renderFilters() {
   FILTERS.group.map = groupMap;
 
   const makeOptions = (name) => {
-    const { icon: iconName, options } = FILTERS[name];
+    const { icon, options } = FILTERS[name];
 
     return `
       <fieldset class="radios">
-        <legend><span class="icon">${icon(iconName)}</span>${name}</legend>
+        <legend><span class="icon">${icon(icon)}</span>${name}</legend>
 
         ${renderOption(name, "", "All")}
 
@@ -218,8 +180,22 @@ function renderFilters() {
     </div>
   `;
 
-  const proxy = $("search-proxy");
-  if (proxy) proxy.addEventListener("input", handleSearch);
+  const debounce = (fn, ms = 150) => {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn(...args), ms);
+    };
+  };
+
+  $("search-proxy").addEventListener("input", e => {
+    debounce(e => {
+      ui.search.value = e.target.value;
+      state.query = e.target.value.toLowerCase();
+      updateURL();
+      renderList();
+    })
+  });
   
   $("clear-btn").addEventListener("click", clearText);
   
@@ -253,16 +229,6 @@ function renderImg(src, alt = "image", lazy = true) {
         src="${src}" 
         alt="${alt}">`
     : `<div class="img"></div>`;
-}
-
-/* -------------------- LOADING -------------------- */
-
-function showLoading() {
-  ui.list.innerHTML = `
-    <li class="empty">
-      <span>Loading species...</span>
-    </li>
-  `;
 }
 
 /* -------------------- LIST -------------------- */
@@ -314,6 +280,7 @@ function router() {
     if (species) return showDetail(species);
   }
 
+  loadFromURL();
   showList();
 }
 
@@ -326,10 +293,7 @@ function showDetail(s) {
 }
 
 function showList() {
-  const label =
-    FILTERS.group.map && state.filters.group
-      ? FILTERS.group.map.get(state.filters.group)
-      : "";
+  const label = FILTERS.group.map?.get(state.filters.group);
 
   ui.title.textContent = label
     ? `${label} Complex`
