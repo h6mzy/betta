@@ -57,6 +57,7 @@ async function init() {
     }));
 
     renderFilters();
+    $("search-proxy").value = state.query;
     showList();
   } catch (err) {
     ui.list.innerHTML = `<li class="empty"><span>Failed to load data</span></li>`;
@@ -91,6 +92,8 @@ function loadFromURL() {
   state.filters.group = params.get("group") || "";
   state.filters.breeding = params.get("breeding") || "";
   state.query = (params.get("q") || "").toLowerCase();
+
+  ui.search.value = state.query;
 }
 
 function updateURL() {
@@ -144,6 +147,26 @@ function renderOption(name, value, label) {
   `;
 }
 
+const debounce = (fn, ms = 150) => {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), ms);
+  };
+};
+
+function setQuery(value) {
+  state.query = value.toLowerCase();
+  ui.search.value = value;
+  $("search-proxy").value = value;
+}
+
+const handleSearch = debounce(e => {
+  setQuery(e.target.value);
+  updateURL();
+  renderList();
+}, 150);
+
 function renderFilters() {
   const groupMap = new Map();
 
@@ -161,11 +184,11 @@ function renderFilters() {
   FILTERS.group.map = groupMap;
 
   const makeOptions = (name) => {
-    const { icon, options } = FILTERS[name];
+    const { icon: iconName, options } = FILTERS[name];
 
     return `
       <fieldset class="radios">
-        <legend><span class="icon">${icon(icon)}</span>${name}</legend>
+        <legend><span class="icon">${icon(iconName)}</span>${name}</legend>
 
         ${renderOption(name, "", "All")}
 
@@ -188,22 +211,7 @@ function renderFilters() {
     </div>
   `;
 
-  const debounce = (fn, ms = 150) => {
-    let t;
-    return (...args) => {
-      clearTimeout(t);
-      t = setTimeout(() => fn(...args), ms);
-    };
-  };
-
-  $("search-proxy").addEventListener("input", e => {
-    debounce(e => {
-      ui.search.value = e.target.value;
-      state.query = e.target.value.toLowerCase();
-      updateURL();
-      renderList();
-    })
-  });
+  $("search-proxy").addEventListener("input", handleSearch);
   
   $("clear-btn").addEventListener("click", clearText);
   
