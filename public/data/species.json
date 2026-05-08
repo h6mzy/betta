@@ -1,0 +1,631 @@
+[
+  {
+    "slug": "splendens",
+    "group": "Splendens",
+    "name": "Betta Splendens",
+    "scientific": "Betta splendens",
+    "info": "Wild ancestor of domestic fighting fish, native to central Thailand floodplains.",
+    "habitat": "Rice paddies, canals, stagnant shallow waters.",
+    "breeding": "Bubble nester",
+    "captive": "24–28°C, planted aquarium, low current, territorial males.",
+    "redlist": "Vulnerable",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "imbellis",
+    "group": "Splendens",
+    "name": "Crescent Betta",
+    "scientific": "Betta imbellis",
+    "info": "Often called the 'peaceful betta', native to southern Thailand, Malaysia, and parts of Indonesia.",
+    "habitat": "Coastal swamps, slow-flowing streams, and paddy fields, occasionally in brackish water.",
+    "breeding": "Bubble nester",
+    "captive": "24–28°C, densely planted, relatively peaceful compared to splendens but males can still squabble.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "smaragdina",
+    "group": "Splendens",
+    "name": "Emerald Betta",
+    "scientific": "Betta smaragdina",
+    "info": "Notable for its dense iridescent green/blue scaling, native to the Isan region of Thailand.",
+    "habitat": "Swamps, rice paddies, and slow-moving streams.",
+    "breeding": "Bubble nester",
+    "captive": "24–28°C, acidic to neutral water, thrives with rich vegetation and floating plants.",
+    "redlist": "Data Deficient",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "mahachaiensis",
+    "group": "Splendens",
+    "name": "Mahachai Betta",
+    "scientific": "Betta mahachaiensis",
+    "info": "A recently formally described species known for inhabiting tidal environments near the Gulf of Thailand.",
+    "habitat": "Nipa palm swamps and brackish coastal waters.",
+    "breeding": "Bubble nester",
+    "captive": "25–28°C, requires slightly hard water or a small addition of marine salt, leaf litter.",
+    "redlist": "Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "macrostoma",
+    "group": "Unimaculata",
+    "name": "Brunei Beauty",
+    "scientific": "Betta macrostoma",
+    "info": "A highly sought-after, large mouthbrooding betta from Brunei with striking orange and black markings.",
+    "habitat": "Clear, fast-flowing forest streams with rocky or sandy substrates.",
+    "breeding": "Mouthbrooder",
+    "captive": "22–25°C, requires cooler water, tight-fitting lid (prone to jumping), and pristine water conditions.",
+    "redlist": "Vulnerable",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "albimarginata",
+    "group": "Albimarginata",
+    "name": "White-Seam Betta",
+    "scientific": "Betta albimarginata",
+    "info": "Small, distinct species with striking white margins on its fins, native to Borneo.",
+    "habitat": "Shallow forest streams with dense leaf litter and tree roots.",
+    "breeding": "Mouthbrooder",
+    "captive": "23–27°C, soft acidic water, ideal for a blackwater biotope setup.",
+    "redlist": "Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "channoides",
+    "group": "Albimarginata",
+    "name": "Snakehead Betta",
+    "scientific": "Betta channoides",
+    "info": "Resembles a tiny snakehead fish, closely related to B. albimarginata with intense red coloration.",
+    "habitat": "Acidic blackwater streams in forest peat swamps.",
+    "breeding": "Mouthbrooder",
+    "captive": "24–28°C, heavy leaf litter, dim lighting, soft acidic water.",
+    "redlist": "Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "coccina",
+    "group": "Coccina",
+    "name": "Wine-Red Betta",
+    "scientific": "Betta coccina",
+    "info": "A small, deep red, slender-bodied species from the peat swamps of Sumatra and Malaysia.",
+    "habitat": "Highly acidic blackwater peat swamps, often hiding in submerged leaf litter.",
+    "breeding": "Bubble nester",
+    "captive": "22–27°C, pH 4.0-6.0, dense plants, strictly blackwater conditions.",
+    "redlist": "Vulnerable",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "persephone",
+    "group": "Coccina",
+    "name": "Black Betta",
+    "scientific": "Betta persephone",
+    "info": "A tiny, predominantly black/blue betta from Malaysia, threatened by habitat loss.",
+    "habitat": "Closed-canopy peat swamp forests.",
+    "breeding": "Bubble nester",
+    "captive": "23–28°C, extremely soft acidic water (pH 4.0-5.0), very shy, requires hiding spots.",
+    "redlist": "Critically Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "pugnax",
+    "group": "Pugnax",
+    "name": "Penang Betta",
+    "scientific": "Betta pugnax",
+    "info": "A robust, adaptable, and widespread mouthbrooder found across Southeast Asia.",
+    "habitat": "Forest streams, swamps, and even slightly degraded or fast-flowing habitats.",
+    "breeding": "Mouthbrooder",
+    "captive": "24–28°C, adaptable to various water conditions, generally peaceful for a betta.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "dimidiata",
+    "group": "Dimidiata",
+    "name": "Betta Dimidiata",
+    "scientific": "Betta dimidiata",
+    "info": "A slender, graceful betta known for its incredibly long, flowing ventral fins.",
+    "habitat": "Blackwater streams and peat swamps in Borneo.",
+    "breeding": "Mouthbrooder",
+    "captive": "22–26°C, soft acidic water, prefers leaf litter substrates and minimal water flow.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "bellica",
+    "group": "Bellica",
+    "name": "Slender Betta",
+    "scientific": "Betta bellica",
+    "info": "One of the largest bubble-nesting bettas, native to Malaysia and Indonesia.",
+    "habitat": "Peat swamps and blackwater streams.",
+    "breeding": "Bubble nester",
+    "captive": "24–30°C, large tank with plenty of surface cover, prefers acidic water.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "edithae",
+    "group": "Edithae",
+    "name": "Edith's Betta",
+    "scientific": "Betta edithae",
+    "info": "A highly adaptable species found across Borneo and surrounding islands, named after Edith Korthaus.",
+    "habitat": "Swamps, ditches, and slow streams, often found in blackwater conditions.",
+    "breeding": "Mouthbrooder",
+    "captive": "24–28°C, tolerant of a wide range of water parameters, excellent wild species for beginners.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "hendra",
+    "group": "Coccina",
+    "name": "Betta Hendra",
+    "scientific": "Betta hendra",
+    "info": "A stunning iridescent blue-green blackwater species from Central Kalimantan.",
+    "habitat": "Shallow, highly acidic peat swamp pools.",
+    "breeding": "Bubble nester",
+    "captive": "22–27°C, pH 4.0-5.5, strictly blackwater, requires heavily planted tanks with leaf litter.",
+    "redlist": "Critically Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "unimaculata",
+    "group": "Unimaculata",
+    "name": "One-Spot Betta",
+    "scientific": "Betta unimaculata",
+    "info": "A large, relatively aggressive mouthbrooding species from Borneo.",
+    "habitat": "Clear, fast-flowing hill streams to slow-moving swamp waters.",
+    "breeding": "Mouthbrooder",
+    "captive": "23–27°C, requires a large tank, tight lid to prevent jumping, can be aggressive to conspecifics.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "siamorientalis",
+    "group": "Splendens",
+    "name": "Black-Finned Betta",
+    "scientific": "Betta siamorientalis",
+    "info": "A recently described species closely related to B. imbellis, but with distinct black opercular cheeks and darker finnage.",
+    "habitat": "Shallow water in rice paddies, grassy swamps, and ditches in eastern Thailand and Cambodia.",
+    "breeding": "Bubble nester",
+    "captive": "24–28°C, densely planted with floating vegetation, soft to medium-hard water.",
+    "redlist": "Vulnerable",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "stiktos",
+    "group": "Splendens",
+    "name": "Mekong Betta",
+    "scientific": "Betta stiktos",
+    "info": "Named for the spots on its dorsal fin, this species is found in the Mekong river drainage in Cambodia.",
+    "habitat": "Stagnant or slow-moving water in floodplains and swamps.",
+    "breeding": "Bubble nester",
+    "captive": "24–28°C, typical splendens-complex care, requires a cover of floating plants.",
+    "redlist": "Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "brownorum",
+    "group": "Coccina",
+    "name": "Brown's Betta",
+    "scientific": "Betta brownorum",
+    "info": "A tiny, reddish betta notable for the iridescent blue/green spot often found on the middle of its flanks.",
+    "habitat": "Extremely shallow, acidic blackwater pools among leaf litter in Borneo.",
+    "breeding": "Bubble nester",
+    "captive": "22–26°C, pH 4.0-5.5, strictly blackwater, requires subdued lighting.",
+    "redlist": "Vulnerable",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "rutilans",
+    "group": "Coccina",
+    "name": "Red Betta",
+    "scientific": "Betta rutilans",
+    "info": "A slender, solid red betta from the Indonesian part of Borneo (Kalimantan). Unlike some in its complex, it often lacks the lateral spot.",
+    "habitat": "Acidic peat swamps, often found in water barely deep enough to cover its body.",
+    "breeding": "Bubble nester",
+    "captive": "22–26°C, highly acidic blackwater, keep in species-only setups due to timid nature.",
+    "redlist": "Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "uberis",
+    "group": "Coccina",
+    "name": "Betta Uberis",
+    "scientific": "Betta uberis",
+    "info": "Closely related to B. burdigala, this small reddish fish sometimes builds submerged bubble nests under leaves.",
+    "habitat": "Peat swamp forests in Indonesian Borneo.",
+    "breeding": "Bubble nester",
+    "captive": "22–27°C, soft and acidic water (pH 4.0-5.0), abundant leaf litter.",
+    "redlist": "Vulnerable",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "livida",
+    "group": "Coccina",
+    "name": "Selangor Red Betta",
+    "scientific": "Betta livida",
+    "info": "Endemic to Selangor, Malaysia. It has beautiful green iridescence on its red body but is highly threatened by development.",
+    "habitat": "Blackwater streams in peat swamp forests.",
+    "breeding": "Bubble nester",
+    "captive": "22–26°C, extreme blackwater conditions, requires heavy cover to feel secure.",
+    "redlist": "Critically Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "simplex",
+    "group": "Picta",
+    "name": "Krabi Betta",
+    "scientific": "Betta simplex",
+    "info": "A peaceful mouthbrooder from Thailand. It has a relatively restricted natural range near Krabi.",
+    "habitat": "Clear, neutral to slightly alkaline waters over limestone formations, unlike the blackwater preference of most bettas.",
+    "breeding": "Mouthbrooder",
+    "captive": "24–28°C, pH 7.0-8.0, appreciates harder water, making it unique among bettas.",
+    "redlist": "Critically Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "picta",
+    "group": "Picta",
+    "name": "Spotted Betta",
+    "scientific": "Betta picta",
+    "info": "The type species for the genus Betta, described way back in 1846. It is native to Java.",
+    "habitat": "Highland streams, flowing water, and sometimes ditches with clear water.",
+    "breeding": "Mouthbrooder",
+    "captive": "22–25°C, prefers cooler, well-oxygenated water with some flow.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "taeniata",
+    "group": "Picta",
+    "name": "Borneo Banded Betta",
+    "scientific": "Betta taeniata",
+    "info": "Characterized by dark horizontal bands across its body, widespread across parts of Borneo.",
+    "habitat": "Clear, fast-flowing streams as well as sluggish blackwater.",
+    "breeding": "Mouthbrooder",
+    "captive": "22–26°C, adaptable, but requires pristine water conditions and a tight-fitting lid.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "foerschi",
+    "group": "Foerschi",
+    "name": "Foersch's Betta",
+    "scientific": "Betta foerschi",
+    "info": "A beautifully marked mouthbrooder featuring deep body coloration and bright metallic gill plates.",
+    "habitat": "Peat swamp forests in Central Kalimantan, Borneo.",
+    "breeding": "Mouthbrooder",
+    "captive": "24–28°C, blackwater setup, acidic pH, timid and should not be housed with boisterous fish.",
+    "redlist": "Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "mandor",
+    "group": "Foerschi",
+    "name": "Mandor Betta",
+    "scientific": "Betta mandor",
+    "info": "Closely related to B. foerschi but distinguishable by differences in facial markings and body depth.",
+    "habitat": "Found exclusively in the Mandor river basin in West Kalimantan.",
+    "breeding": "Mouthbrooder",
+    "captive": "23–27°C, soft, acidic blackwater, heavy planting and leaf litter.",
+    "redlist": "Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "gladiator",
+    "group": "Unimaculata",
+    "name": "Gladiator Betta",
+    "scientific": "Betta gladiator",
+    "info": "A large and highly aggressive species from Sabah, Malaysia, known to be highly intolerant of conspecifics.",
+    "habitat": "Slow-moving blackwater streams and peat swamps.",
+    "breeding": "Mouthbrooder",
+    "captive": "24–27°C, requires a very large tank, plenty of line-of-sight breaks to manage aggression.",
+    "redlist": "Vulnerable",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "pallifina",
+    "group": "Unimaculata",
+    "name": "Clear-Finned Betta",
+    "scientific": "Betta pallifina",
+    "info": "Named for the lack of distinct patterning in its fins. Native to Central Kalimantan.",
+    "habitat": "Clear, relatively fast-flowing streams with sandy or rocky bottoms.",
+    "breeding": "Mouthbrooder",
+    "captive": "24–27°C, prefers clean, well-oxygenated water with some movement. Exceptional jumpers.",
+    "redlist": "Data Deficient",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "pi",
+    "group": "Waseri",
+    "name": "Pi Betta",
+    "scientific": "Betta pi",
+    "info": "A very large betta named after the distinctive Greek letter 'π' shaped mark on its chin.",
+    "habitat": "Deep peat swamps and blackwater habitats in Thailand.",
+    "breeding": "Mouthbrooder",
+    "captive": "24–28°C, requires a spacious tank with soft, highly acidic blackwater conditions.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "waseri",
+    "group": "Waseri",
+    "name": "Waser's Betta",
+    "scientific": "Betta waseri",
+    "info": "A large mouthbrooder from Peninsular Malaysia, stoutly built with a broad head.",
+    "habitat": "Blackwater peat swamps among thick riparian vegetation.",
+    "breeding": "Mouthbrooder",
+    "captive": "24–28°C, strict blackwater parameters, heavy lid required, peaceful for its size.",
+    "redlist": "Vulnerable",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "akarensis",
+    "group": "Akarensis",
+    "name": "Akar Betta",
+    "scientific": "Betta akarensis",
+    "info": "The namesake of the Akarensis complex, a medium-sized, somewhat plain but charming mouthbrooder.",
+    "habitat": "Clear forest streams and stagnant pools in Sarawak and Brunei.",
+    "breeding": "Mouthbrooder",
+    "captive": "23–27°C, adaptable to slightly acidic or neutral water, prefers dim lighting.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "aurigans",
+    "group": "Akarensis",
+    "name": "Golden Betta",
+    "scientific": "Betta aurigans",
+    "info": "Named for its golden/yellowish hue. Endemic to the Natuna Islands of Indonesia.",
+    "habitat": "Blackwater streams in swampy forest areas.",
+    "breeding": "Mouthbrooder",
+    "captive": "24–28°C, acidic blackwater, best kept in a species tank.",
+    "redlist": "Endangered",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "anabatoides",
+    "group": "Anabatoides",
+    "name": "Giant Betta",
+    "scientific": "Betta anabatoides",
+    "info": "Despite the common name, it is not the largest betta, but it has a very stout, thickset body.",
+    "habitat": "Blackwater swamps and slow-flowing rivers in southern Borneo.",
+    "breeding": "Mouthbrooder",
+    "captive": "24–28°C, heavily planted blackwater setup, peaceful disposition for a larger species.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "simorum",
+    "group": "Bellica",
+    "name": "Sims' Betta",
+    "scientific": "Betta simorum",
+    "info": "Closely related to B. bellica, it is a large bubble-nesting species with an elongated body.",
+    "habitat": "Peat swamp forests in Sumatra.",
+    "breeding": "Bubble nester",
+    "captive": "24–30°C, tall plants reaching the surface to anchor massive bubble nests.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "prima",
+    "group": "Pugnax",
+    "name": "Prima Betta",
+    "scientific": "Betta prima",
+    "info": "A widely distributed mouthbrooder from mainland Southeast Asia, incredibly adaptable.",
+    "habitat": "Everything from swamps and ditches to clear, flowing hill streams.",
+    "breeding": "Mouthbrooder",
+    "captive": "22–27°C, very undemanding regarding water parameters, great beginner wild betta.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "enisae",
+    "group": "Pugnax",
+    "name": "Enis's Betta",
+    "scientific": "Betta enisae",
+    "info": "A strikingly patterned mouthbrooder with iridescent blue scaling on the lower body.",
+    "habitat": "Clear, shallow, fast-flowing streams in West Kalimantan.",
+    "breeding": "Mouthbrooder",
+    "captive": "23–26°C, prefers clean, slightly acidic to neutral water with good oxygenation.",
+    "redlist": "Data Deficient",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  },
+  {
+    "slug": "krataios",
+    "group": "Dimidiata",
+    "name": "Krataios Betta",
+    "scientific": "Betta krataios",
+    "info": "A heavily built relative of B. dimidiata, mostly found in the lower Kapuas basin in Borneo.",
+    "habitat": "Acidic blackwater streams and swamps.",
+    "breeding": "Mouthbrooder",
+    "captive": "23–27°C, soft and acidic water, leaf litter substrate, peaceful species.",
+    "redlist": "Least Concern",
+    "photos": [
+      {
+        "src": "/static/img/splendens.webp",
+        "caption": "Wild male splendens"
+      }
+    ]
+  }
+]
