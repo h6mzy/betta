@@ -13,19 +13,7 @@ const ui = {
   back: $("back")
 };
 
-const icons = {
-  close: `<svg class="icon" width="1em" height="1em"><use href="#icon-close"></use></svg>`,
-  closeOutline: `<svg class="icon" width="1em" height="1em"><use href="#icon-close-inner"></use></svg>`,
-  find: `<svg class="icon" width="1em" height="1em"><use href="#icon-find"></use></svg>`,
-  right: `<svg class="icon" width="1em" height="1em"><use href="#icon-right"></use></svg>`,
-  group: `<svg class="icon" width="1em" height="1em"><use href="#icon-group"></use></svg>`,
-  heart: `<svg class="icon" width="1em" height="1em"><use href="#icon-heart"></use></svg>`,
-  scientific: `<svg class="icon" width="1em" height="1em"><use href="#icon-scientific"></use></svg>`,
-  fish: `<svg class="icon" width="1em" height="1em"><use href="#icon-fish"></use></svg>`,
-  mountain: `<svg class="icon" width="1em" height="1em"><use href="#icon-mountain"></use></svg>`,
-  thermometer: `<svg class="icon" width="1em" height="1em"><use href="#icon-thermometer"></use></svg>`,
-  hand: `<svg class="icon" width="1em" height="1em"><use href="#icon-hand"></use></svg>`,
-};
+const icon = id => `<svg class="icon" width="1em" height="1em"><use href="#icon-${id}"></use></svg>`;
 
 let speciesData = [];
 let state = {
@@ -115,8 +103,8 @@ function toggleDrawer() {
   ui.mask.classList.toggle("show");
 
   ui.toggle.innerHTML = open
-    ? `${icons.close}<span>Close</span>`
-    : `${icons.find}<span>Find</span>`;
+    ? `${icon("close")}<span>Close</span>`
+    : `${icon("find")}<span>Find</span>`;
 }
 
 /* -------------------- FILTERS -------------------- */
@@ -143,7 +131,7 @@ function renderOption(name, value, label) {
         name="${name}"
         value="${value}"
         ${state.filters[name] === value ? "checked" : ""}>
-      <span>${icons.right}</span>${label}
+      <span>${icon("right")}</span>${label}
     </label>
   `;
 }
@@ -169,7 +157,7 @@ function renderFilters() {
 
     return `
       <fieldset class="radios">
-        <legend><span class="icon">${icons[icon]}</span>${name}</legend>
+        <legend><span class="icon">${icon(icon)}</span>${name}</legend>
 
         ${renderOption(name, "", "All")}
 
@@ -183,7 +171,7 @@ function renderFilters() {
   ui.filters.innerHTML = `
     <div class="box text-box">
       <input type="text" placeholder="Search..." id="search-proxy" />
-      <button id="clear-btn" class="clear icon" type="button" aria-label="clear text">${icons.closeOutline}</button>
+      <button id="clear-btn" class="clear icon" type="button" aria-label="clear text">${icon("close-inner")}</button>
     </div>
     
     <div class="scroll-y">
@@ -192,11 +180,21 @@ function renderFilters() {
     </div>
   `;
 
+  const debounce = (fn, ms = 150) => {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn(...args), ms);
+    };
+  };
+
   $("search-proxy").addEventListener("input", e => {
-    ui.search.value = e.target.value;
-    state.query = e.target.value.toLowerCase();
-    updateURL();
-    renderList();
+    debounce(e => {
+      ui.search.value = e.target.value;
+      state.query = e.target.value.toLowerCase();
+      updateURL();
+      renderList();
+    })
   });
   
   $("clear-btn").addEventListener("click", clearText);
@@ -212,7 +210,7 @@ function renderFilters() {
 }
 
 function clearText() {
-  ui.search.value = state.query;
+  ui.search.value = "";
   $("search-proxy").value = "";
   state.query = "";
   updateURL();
@@ -259,12 +257,12 @@ function renderDetail(s) {
       ${renderImg(s.photos?.[0]?.src, s.name, false)}
       <div class="h-full scroll-y pb">
         <div class="desc">
-          <p><strong><span class="icon">${icons.scientific}</span> Scientific</strong><span class="value">${s.scientific}</span></p>
-          <p><strong><span class="icon">${icons.fish}</span>Info</strong><span class="value">${s.info}</span></p>
-          <p><strong><span class="icon">${icons.mountain}</span>Habitat</strong><span class="value">${s.habitat}</span></p>
-          <p><strong><span class="icon">${icons.heart}</span>Breeding</strong><span class="value">${s.breeding}</span></p>
-          <p><strong><span class="icon">${icons.thermometer}</span>Captive</strong><span class="value">${s.captive}</span></p>
-          <p><strong><span class="icon">${icons.hand}</span>Red List</strong><span class="value">${s.redlist}</span></p>
+          <p><strong><span class="icon">${icon("scientific")}</span> Scientific</strong><span class="value">${s.scientific}</span></p>
+          <p><strong><span class="icon">${icon("fish")}</span>Info</strong><span class="value">${s.info}</span></p>
+          <p><strong><span class="icon">${icon("mountain")}</span>Habitat</strong><span class="value">${s.habitat}</span></p>
+          <p><strong><span class="icon">${icon("heart")}</span>Breeding</strong><span class="value">${s.breeding}</span></p>
+          <p><strong><span class="icon">${icon("thermometer")}</span>Captive</strong><span class="value">${s.captive}</span></p>
+          <p><strong><span class="icon">${icon("hand")}</span>Red List</strong><span class="value">${s.redlist}</span></p>
         </div>
       </div>
     </div>
