@@ -71,7 +71,7 @@ async function init() {
   showLoading();
 
   try {
-    const res = await fetch("data/species.json");
+    const res = await fetch("/data/species.json");
     if (!res.ok) throw new Error("Failed to load data");
 
     const json = await res.json();
