@@ -42,7 +42,6 @@ init();
 
 async function init() {
   loadFromURL();
-  bindEvents();
   showLoading();
 
   try {
@@ -56,8 +55,12 @@ async function init() {
       id: String(i + 1).padStart(3, "0")
     }));
 
-    renderFilters();
+    renderFilters();   // ensures #search-proxy exists
+
+    bindEvents();      // move here
+
     $("search-proxy").value = state.query;
+
     showList();
   } catch (err) {
     ui.list.innerHTML = `<li class="empty"><span>Failed to load data</span></li>`;
