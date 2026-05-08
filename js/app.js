@@ -156,9 +156,13 @@ const debounce = (fn, ms = 150) => {
 };
 
 function setQuery(value) {
-  state.query = value.toLowerCase();
+  const v = value.toLowerCase();
+
+  state.query = v;
+
   ui.search.value = value;
-  $("search-proxy").value = value;
+  const proxy = $("search-proxy");
+  if (proxy) proxy.value = value;
 }
 
 const handleSearch = debounce(e => {
@@ -211,7 +215,8 @@ function renderFilters() {
     </div>
   `;
 
-  $("search-proxy").addEventListener("input", handleSearch);
+  const proxy = $("search-proxy");
+  if (proxy) proxy.addEventListener("input", handleSearch);
   
   $("clear-btn").addEventListener("click", clearText);
   
@@ -318,7 +323,10 @@ function showDetail(s) {
 }
 
 function showList() {
-  const label = FILTERS.group.map?.get(state.filters.group);
+  const label =
+    FILTERS.group.map && state.filters.group
+      ? FILTERS.group.map.get(state.filters.group)
+      : "";
 
   ui.title.textContent = label
     ? `${label} Complex`
