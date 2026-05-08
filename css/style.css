@@ -389,8 +389,8 @@ input[type=text] {
 
 .img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
   filter: grayscale(0.6);
   background: radial-gradient(var(--text-weak), transparent 60%);
   image-rendering: pixelated;
@@ -400,6 +400,8 @@ input[type=text] {
 
 #list .img {
   width: 90px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
   flex: none;
 }
 
