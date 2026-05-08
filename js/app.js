@@ -153,11 +153,11 @@ function renderFilters() {
   FILTERS.group.map = groupMap;
 
   const makeOptions = (name) => {
-    const { icon, options } = FILTERS[name];
+    const { icon: iconName, options } = FILTERS[name];
 
     return `
       <fieldset class="radios">
-        <legend><span class="icon">${icon(icon)}</span>${name}</legend>
+        <legend><span class="icon">${icon(iconName)}</span>${name}</legend>
 
         ${renderOption(name, "", "All")}
 
