@@ -23,8 +23,7 @@ let state = {
 
 /* -------------------- HELPERS -------------------- */
 
-const slugify = (str) =>
-  str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+const slugify = (str) => str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 const match = (s) =>
   (!state.query ||
@@ -136,6 +135,14 @@ function renderOption(name, value, label) {
   `;
 }
 
+const debounce = (fn, ms = 150) => {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), ms);
+  };
+};
+
 function renderFilters() {
   const groupMap = new Map();
 
@@ -180,22 +187,14 @@ function renderFilters() {
     </div>
   `;
 
-  const debounce = (fn, ms = 150) => {
-    let t;
-    return (...args) => {
-      clearTimeout(t);
-      t = setTimeout(() => fn(...args), ms);
-    };
-  };
-
-  $("search-proxy").addEventListener("input", e => {
-    debounce(e => {
-      ui.search.value = e.target.value;
-      state.query = e.target.value.toLowerCase();
-      updateURL();
-      renderList();
-    })
+  const handleSearch = debounce((e) => {
+    ui.search.value = e.target.value;
+    state.query = e.target.value.toLowerCase();
+    updateURL();
+    renderList();
   });
+  
+  $("search-proxy").addEventListener("input", handleSearch);
   
   $("clear-btn").addEventListener("click", clearText);
   
